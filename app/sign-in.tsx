@@ -1,13 +1,30 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  Alert,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
 import icons from '@/constants/icons';
+import { login } from '@/lib/appwrite';
 import images from '@/constants/images';
+import { useGlobalContext } from '@/lib/global-provider';
 
 const SignIn = () => {
-  const handleLogin = () => {
-    // Implement Google login
+  const { refetch, loading, isLoggedIn } = useGlobalContext();
+
+  const handleLogin = async () => {
+    const result = await login();
+
+    if (result) {
+      refetch();
+    } else {
+      Alert.alert('Error', 'Login failed');
+    }
   };
 
   return (
