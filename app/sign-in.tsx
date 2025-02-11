@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  Image,
-  ScrollView,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-import images from '@/constants/images';
 import icons from '@/constants/icons';
+import images from '@/constants/images';
 
 const SignIn = () => {
   const handleLogin = () => {
@@ -42,9 +35,9 @@ const SignIn = () => {
           >
             <View className="flex flex-row items-center justify-center">
               <Image
-                source={icons.google}
                 className="w-5 h-5"
                 resizeMode="contain"
+                source={icons.google}
               />
               <Text className="text-lg font-rubik-medium text-black-300 ml-2">
                 Continue with Google
