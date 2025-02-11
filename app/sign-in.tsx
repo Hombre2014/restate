@@ -1,20 +1,30 @@
 import React from 'react';
-import {
-  Image,
-  ScrollView,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  Text,
+  View,
+  Image,
+  Alert,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
-import images from '@/constants/images';
 import icons from '@/constants/icons';
+import { login } from '@/lib/appwrite';
+import images from '@/constants/images';
+import { useGlobalContext } from '@/lib/global-provider';
 
 const SignIn = () => {
-  const handleLogin = () => {
-    // Implement Google login
+  const { refetch, loading, isLoggedIn } = useGlobalContext();
+
+  const handleLogin = async () => {
+    const result = await login();
+
+    if (result) {
+      refetch();
+    } else {
+      Alert.alert('Error', 'Login failed');
+    }
   };
 
   return (
@@ -42,9 +52,9 @@ const SignIn = () => {
           >
             <View className="flex flex-row items-center justify-center">
               <Image
-                source={icons.google}
                 className="w-5 h-5"
                 resizeMode="contain"
+                source={icons.google}
               />
               <Text className="text-lg font-rubik-medium text-black-300 ml-2">
                 Continue with Google
