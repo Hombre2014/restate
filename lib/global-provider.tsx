@@ -34,7 +34,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 
   const isLoggedIn = !!user;
 
-  console.log(JSON.stringify(user, null, 2));
+  console.log('User: ', JSON.stringify(user, null, 2));
 
   return (
     <GlobalContext.Provider
@@ -52,6 +52,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 
 export const useGlobalContext = (): GlobalContextType => {
   const context = useContext(GlobalContext);
+
   if (!context)
     throw new Error('useGlobalContext must be used within a GlobalProvider');
 
