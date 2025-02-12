@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Text,
@@ -17,11 +18,16 @@ import { useGlobalContext } from '@/lib/global-provider';
 const SignIn = () => {
   const { refetch, loading, isLoggedIn } = useGlobalContext();
 
+  if (!loading && isLoggedIn) return <Redirect href="/" />;
+
   const handleLogin = async () => {
     const result = await login();
 
+    console.log('Login result:', result);
+
     if (result) {
-      refetch();
+      console.log('Login successful');
+      // refetch({});
     } else {
       Alert.alert('Error', 'Login failed');
     }

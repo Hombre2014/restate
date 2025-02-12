@@ -34,6 +34,8 @@ export async function login() {
       redirectUri
     );
 
+    console.log('browserResult', browserResult);
+
     if (browserResult.type !== 'success')
       throw new Error('Failed to login - no result');
 
@@ -72,17 +74,8 @@ export async function getCurrentUser() {
 
     if (response.$id) {
       const userAvatar = avatar.getInitials(response.name);
-      // Original code
-      // return {
-      //   ...response,
-      //   avatar: userAvatar.toString(),
-      // };
-
-      // To fix an type error in global-provider.tsx
       return {
-        $id: response.$id,
-        name: response.name,
-        email: response.email,
+        ...response,
         avatar: userAvatar.toString(),
       };
     }
